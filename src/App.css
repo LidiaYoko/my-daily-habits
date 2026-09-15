@@ -79,28 +79,29 @@ body {
 .habit-card button:hover {
   background: #f0f4f8;
 }
-.habit-form { 
-  display: grid; 
-  gap: 16px; 
-} 
- 
-.field { 
-  display: grid; 
-  gap: 6px; 
-} 
- 
-.field input { 
-  width: 100%; 
-  padding: 10px 12px; 
-  border: 1px solid #cbd5e1; 
-  border-radius: 8px; 
-  font: inherit; 
-} 
- 
-.form-error { 
-  margin: 0; 
-  color: #b42318; 
-  font-weight: 700; 
+
+.habit-form {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.form-error {
+  margin: 0;
+  color: #b42318;
+  font-weight: 700;
 }
 
 .panel {
@@ -121,4 +122,32 @@ body {
 
 .panel-header h2 {
   margin: 0;
+}
+
+app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 4%;
+  border-bottom: 1px solid #d7dde5;
+  background: #ffffff;
+}
+
+.app-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-header a {
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #334155;
+  text-decoration: none;
+}
+
+.app-header a.active {
+  background: #1f2937;
+  color: #ffffff;
 }

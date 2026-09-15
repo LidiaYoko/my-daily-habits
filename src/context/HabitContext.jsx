@@ -2,39 +2,39 @@ import { createContext, useEffect, useState } from "react";
 import { initialHabits } from "../data/habits";
 const STORAGE_KEY = "my-daily-habits:habits";
 function loadHabits() {
- const savedHabits = localStorage.getItem(STORAGE_KEY);
- if (!savedHabits) return initialHabits;
- try {
- const parsedHabits = JSON.parse(savedHabits);
- return Array.isArray(parsedHabits) ? parsedHabits : initialHabits;
- } catch {
- return initialHabits;
- }
+  const savedHabits = localStorage.getItem(STORAGE_KEY);
+  if (!savedHabits) return initialHabits;
+  try {
+    const parsedHabits = JSON.parse(savedHabits);
+    return Array.isArray(parsedHabits) ? parsedHabits : initialHabits;
+  } catch {
+    return initialHabits;
+  }
 }
 // eslint-disable-next-line react-refresh/only-export-components
 export const HabitContext = createContext(null);
 
 export function HabitsProvider({ children }) {
- const [habits, setHabits] = useState(loadHabits);
+  const [habits, setHabits] = useState(loadHabits);
 
- const completedCount = habits.filter(
+  const completedCount = habits.filter(
     (habit) => habit.completed,
- ).length;
+  ).length;
 
- useEffect(() => {
+  useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(habits));
- }, [habits]);
+  }, [habits]);
 
- function addHabit(newHabit) {
+  function addHabit(newHabit) {
     setHabits((current) => [...current, newHabit]);
- }
+  }
 
- function toggleHabit(habitId) {
+  function toggleHabit(habitId) {
     setHabits((current) =>
       current.map((habit) =>
         habit.id === habitId
-         ? { ...habit, completed: !habit.completed }
-        : habit,
+          ? { ...habit, completed: !habit.completed }
+          : habit,
       ),
     );
   }
@@ -43,7 +43,7 @@ export function HabitsProvider({ children }) {
     completedCount,
     addHabit,
     toggleHabit,
- };
+  };
 
   return (
     <HabitContext.Provider value={value}>

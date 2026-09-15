@@ -1,43 +1,28 @@
-import { useContext, useEffect } from "react";
-import "./App.css"; 
-import HabitForm from "./components/HabitForm"; 
-import HabitList from "./components/HabitList"; 
-import Panel from "./components/Panel"; 
-import { HabitContext } from "./context/HabitContext";
- 
+import { NavLink, Route, Routes } from "react-router";
+import "./App.css";
+import AboutPage from "./pages/AboutPage";
+import HomePage from "./pages/Homepage";
+import NewHabitPage from "./pages/NewHabitPage";
+import NotFoundPage from "./pages/NotFoundPage";
 export default function App() {
- const habitsContext = useContext(HabitContext);
-
- if (!habitsContext) {
-  throw new Error("App precisa estar dentro de HabitsProvider.");
- }
-
-const { habits, completedCount } = habitsContext;
- 
-useEffect(() => {
- const previousTitle = document.title;
- document.title = `${completedCount}/${habits.length} hábitos concluídos`;
- 
-  return () => {
-   document.title = previousTitle;
-   };
-
-  }, [completedCount, habits.length]);
- return (
-  <main className="app">
-    <header className="hero">
-      <p className="eyebrow">MY DAILY HABITS</p>
-      <h1>Pequenos hábitos, progresso visível.</h1>
-      <p>{completedCount} de {habits.length} hábitos concluídos.</p>
-    </header>
-
-  <Panel title="Novo hábito">
-    <HabitForm />
-  </Panel>
-
-  <Panel title="Hábitos de hoje">
-    <HabitList />
-  </Panel>
- </main>
- );
+  return (
+    <div className="app-shell">
+      <header className="app-header">
+        <strong>My Daily Habits</strong>
+        <nav aria-label="Navegação principal">
+          <NavLink to="/" end>Hoje</NavLink>
+          <NavLink to="/novo">Novo hábito</NavLink>
+          <NavLink to="/sobre">Sobre</NavLink>
+        </nav>
+      </header>
+      <main className="app">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/novo" element={<NewHabitPage />} />
+          <Route path="/sobre" element={<AboutPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
